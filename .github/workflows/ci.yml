@@ -14,7 +14,7 @@ jobs:
     - name: Build and Deploy Docker Image
       env: 
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        APP_NAME: ${{ 'Docker-CI-CD' }}
+        APP_NAME: ${{ 'color-app' }}
       run: |
         cd ./
         docker login --username=marone --password=$HEROKU_API_KEY registry.heroku.com
