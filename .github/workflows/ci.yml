@@ -1,0 +1,22 @@
+
+name: CI
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build_icolors:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build and Deploy Docker Image
+      env: 
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        APP_NAME: ${{ 'Docker-CI-CD' }}
+      run: |
+        cd ./
+        docker login --username=marone --password=$HEROKU_API_KEY registry.heroku.com
+        heroku container:push web -a $APP_NAME
+        heroku container:release web -a $APP_NAME
